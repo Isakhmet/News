@@ -1,33 +1,59 @@
-"A datetime string with format 'Y-m-d H:i:s', e.g. '2018-01-01 13:00:00'."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
-"A date string with format 'Y-m-d', e.g. '2011-05-23'."
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 type Query {
-    users: [User!]! @paginate(type: "paginator" model: "App\\User")
-    user(id: ID @eq): User @find(model: "App\\User")
+    news: [News!]! @all
+    newsById(id: Int! @eq): News @find
 }
 
 type Mutation {
-    createUser(
-        name: String @rules(apply: ["required"])
-        email: String @rules(apply: ["required", "email", "unique:users,email"])
-    ): User @create(model: "App\\User")
-    updateUser(
+    createNews(
+        title: String @rules(apply: ["required"])
+        alias: String @rules(apply: ["required"])
+        anons: String @rules(apply: ["required"])
+        image: String
+        image_copyright: String
+        description: String @rules(apply: ["required"])
+        status: Boolean @rules(apply: ["required"])
+        active_at: String @rules(apply: ["required"])
+        active_end:String
+        settings: String @rules(apply: ["required"])
+        created_at: String @rules(apply: ["required"])
+        updated_at: String
+    ): News @create(model: "App\\Models\\News")
+    updateNews(
         id: ID @rules(apply: ["required"])
-        name: String
-        email: String @rules(apply: ["email"])
-    ): User @update(model: "App\\User")
-    deleteUser(
-        id: ID @rules(apply: ["required"])
-    ): User @delete(model: "App\\User")
+        title: String @rules(apply: ["required"])
+        alias: String @rules(apply: ["required"])
+        anons: String @rules(apply: ["required"])
+        image: String
+        image_copyright: String
+        description: String @rules(apply: ["required"])
+        status: Boolean @rules(apply: ["required"])
+        active_at: String @rules(apply: ["required"])
+        active_end:String
+        settings: String @rules(apply: ["required"])
+        created_at: String @rules(apply: ["required"])
+        updated_at: String
+    ): News @update(model: "App\\Models\\News")
+    deleteNews(
+        id: ID!
+    ): News @delete(model: "App\\Models\\News")
 }
 
-type User {
+type News {
     id: ID!
-    name: String!
-    email: String!
-    created_at: DateTime!
-    updated_at: DateTime!
+    title: String!
+    alias: String!
+    anons: String!
+    image: String
+    image_copyright: String
+    description: String!
+    status: Boolean!
+    active_at: String!
+    active_end:String
+    settings: String!
+    created_at: String!
+    updated_at: String
 }
