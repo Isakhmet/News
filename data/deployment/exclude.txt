@@ -1,0 +1,15 @@
+.git
+.idea
+tmp/*
+storage/framework/cache/*
+storage/logs/*
+logs/*
+tests/
+phpunit.xml
+readme.md
+server.php
+.gitignore
+database/
+data/
+submodule/
+composer.*
