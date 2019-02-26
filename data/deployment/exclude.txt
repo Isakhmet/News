@@ -1,5 +1,6 @@
 .git
 .idea
+.editorconfig
 tmp/*
 storage/framework/cache/*
 storage/logs/*
@@ -13,3 +14,4 @@ database/
 data/
 submodule/
 composer.*
+.env.*
