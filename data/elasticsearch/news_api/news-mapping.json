@@ -1,0 +1,60 @@
+{
+  "mappings": {
+    "news": {
+      "properties": {
+        "title":           {
+          "type": "text",
+          "analyzer":"analyzer_for_shot_text",
+          "search_analyzer":"analyzer_for_shot_text",
+          "search_quote_analyzer":"analyzer_for_shot_text"
+        },
+        "alias":           {
+          "type": "keyword"
+        },
+        "anons":           {
+          "type": "text",
+          "analyzer":"analyzer_for_shot_text",
+          "search_analyzer":"analyzer_for_full_text",
+          "search_quote_analyzer":"analyzer_for_full_text"
+        },
+        "image":           {
+          "type": "keyword"
+        },
+        "image_copyright": {
+          "type": "keyword"
+        },
+        "description":     {
+          "type": "text",
+          "analyzer":"analyzer_for_shot_text",
+          "search_analyzer":"analyzer_for_full_text",
+          "search_quote_analyzer":"analyzer_for_full_text"
+        },
+        "status":          {
+          "type": "boolean"
+        },
+        "active_at":       {
+          "type":   "date",
+          "format": "yyyy-MM-dd"
+        },
+        "active_end":      {
+          "type":   "date",
+          "format": "yyyy-MM-dd"
+        },
+        "settings":        {
+          "type": "text",
+          "analyzer":"analyzer_for_shot_text",
+          "search_analyzer":"analyzer_for_full_text",
+          "search_quote_analyzer":"analyzer_for_full_text"
+        },
+        "created_at":      {
+          "type":   "date",
+          "format": "epoch_millis"
+        },
+        "updated_at":      {
+          "type":   "date",
+          "format": "epoch_millis"
+        }
+      }
+    }
+  }
+}

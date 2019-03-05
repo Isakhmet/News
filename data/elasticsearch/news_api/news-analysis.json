@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "analyzer_for_shot_text": {
+          "type":        "custom",
+          "char_filter": [
+            "html_strip"
+          ],
+          "tokenizer":   "standard",
+          "filter":      [
+            "lowercase",
+            "stop",
+            "snowball"
+          ]
+        },
+        "analyzer_for_full_text":  {
+          "type":        "custom",
+          "char_filter": [
+            "html_strip"
+          ],
+          "tokenizer":   "standard",
+          "filter":      [
+            "lowercase",
+            "english_stop"
+          ]
+        }
+      },
+      "filter":   {
+        "english_stop": {
+          "type":      "stop",
+          "stopwords": "_english_"
+        }
+      }
+    }
+  }
+}
