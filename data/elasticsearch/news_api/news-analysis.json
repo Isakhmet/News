@@ -9,6 +9,8 @@
           ],
           "tokenizer":   "standard",
           "filter":      [
+            "ru_stop",
+            "ru_stemmer",
             "lowercase",
             "stop",
             "snowball"
@@ -21,13 +23,23 @@
           ],
           "tokenizer":   "standard",
           "filter":      [
+            "ru_stop",
+            "ru_stemmer",
             "lowercase",
-            "english_stop"
+            "en_stop"
           ]
         }
       },
       "filter":   {
-        "english_stop": {
+        "ru_stop": {
+          "type": "stop",
+          "stopwords": "_russian_"
+        },
+        "ru_stemmer": {
+          "type": "stemmer",
+          "language": "russian"
+        },
+        "en_stop": {
           "type":      "stop",
           "stopwords": "_english_"
         }
