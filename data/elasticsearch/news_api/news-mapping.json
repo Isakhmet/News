@@ -2,16 +2,16 @@
   "properties": {
     "title":           {
       "type":                  "text",
-      "analyzer":              "analyzer_for_shot_text",
-      "search_analyzer":       "analyzer_for_shot_text",
-      "search_quote_analyzer": "analyzer_for_shot_text"
+      "analyzer":              "analyzer_for_short_text",
+      "search_analyzer":       "analyzer_for_short_text",
+      "search_quote_analyzer": "analyzer_for_short_text"
     },
     "alias":           {
       "type": "keyword"
     },
     "anons":           {
       "type":                  "text",
-      "analyzer":              "analyzer_for_shot_text",
+      "analyzer":              "analyzer_for_short_text",
       "search_analyzer":       "analyzer_for_full_text",
       "search_quote_analyzer": "analyzer_for_full_text"
     },
@@ -23,7 +23,7 @@
     },
     "description":     {
       "type":                  "text",
-      "analyzer":              "analyzer_for_shot_text",
+      "analyzer":              "analyzer_for_short_text",
       "search_analyzer":       "analyzer_for_full_text",
       "search_quote_analyzer": "analyzer_for_full_text"
     },
@@ -40,7 +40,7 @@
     },
     "settings":        {
       "type":                  "text",
-      "analyzer":              "analyzer_for_shot_text",
+      "analyzer":              "analyzer_for_short_text",
       "search_analyzer":       "analyzer_for_full_text",
       "search_quote_analyzer": "analyzer_for_full_text"
     },

@@ -1,7 +1,7 @@
 {
   "analysis": {
     "analyzer": {
-      "analyzer_for_shot_text": {
+      "analyzer_for_short_text": {
         "type":        "custom",
         "char_filter": [
           "html_strip"
