@@ -1,0 +1,47 @@
+{
+  "analysis": {
+    "analyzer": {
+      "analyzer_for_short_text": {
+        "type":        "custom",
+        "char_filter": [
+          "html_strip"
+        ],
+        "tokenizer":   "standard",
+        "filter":      [
+          "ru_stop",
+          "ru_stemmer",
+          "lowercase",
+          "stop",
+          "snowball"
+        ]
+      },
+      "analyzer_for_full_text": {
+        "type":        "custom",
+        "char_filter": [
+          "html_strip"
+        ],
+        "tokenizer":   "standard",
+        "filter":      [
+          "ru_stop",
+          "ru_stemmer",
+          "lowercase",
+          "en_stop"
+        ]
+      }
+    },
+    "filter":   {
+      "ru_stop":    {
+        "type":      "stop",
+        "stopwords": "_russian_"
+      },
+      "ru_stemmer": {
+        "type":     "stemmer",
+        "language": "russian"
+      },
+      "en_stop":    {
+        "type":      "stop",
+        "stopwords": "_english_"
+      }
+    }
+  }
+}
