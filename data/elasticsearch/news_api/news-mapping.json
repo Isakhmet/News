@@ -46,11 +46,11 @@
     },
     "created_at":      {
       "type":   "date",
-      "format": "epoch_millis"
+      "format": "yyyy-MM-dd HH:mm:ss||epoch_second"
     },
     "updated_at":      {
       "type":   "date",
-      "format": "epoch_millis"
+      "format": "yyyy-MM-dd HH:mm:ss||epoch_second"
     }
   }
 }
