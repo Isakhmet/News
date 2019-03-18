@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\GraphQL\Queries;
+namespace App\Http\GraphQL\Mutations;
 
 use App\Models\News;
 use GraphQL\Type\Definition\ResolveInfo;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class LastNews
+class LatestNews
 {
     /**
      * Return a value for the field.
@@ -20,11 +20,18 @@ class LastNews
      */
     public function resolve($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
-        $data = [];
-        foreach ($args as $arg){
-            $data[] = $arg;
-        }
+        // TODO implement the resolver
 
-        return News::whereIn('id', $args['id'])->get();
+        $alias = '';
+        $data = [];
+        if (isset($args)) {
+
+            $alias = $args['alias'];
+            $news = News::create($args);
+            $news->where('alias', $alias)->get();
+            $news->addToIndex();
+
+            return 'ok';
+        }
     }
 }

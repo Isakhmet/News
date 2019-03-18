@@ -6,9 +6,29 @@ type Query {
     lastNews(id: [Int!]!): [News]!
     news: [News!]! @all
     newsById(id: Int! @eq): News @find
+    newsFromElastic(
+        search: String,
+        limit: Int,
+        page: Int,
+        tags: String
+    ): [News]
 }
 
 type Mutation {
+    latestNews(
+        title: String @rules(apply: ["required"])
+        alias: String @rules(apply: ["required"])
+        anons: String @rules(apply: ["required"])
+        image: String
+        image_copyright: String
+        description: String @rules(apply: ["required"])
+        status: Boolean @rules(apply: ["required"])
+        active_at: String @rules(apply: ["required"])
+        active_end:String
+        settings: String @rules(apply: ["required"])
+        created_at: String
+        updated_at: String
+    ): String
     createNews(
         title: String @rules(apply: ["required"])
         alias: String @rules(apply: ["required"])
@@ -51,7 +71,7 @@ type News {
     image: String
     image_copyright: String
     description: String!
-    status: Boolean!
+    status: String!
     active_at: String!
     active_end:String
     settings: String!

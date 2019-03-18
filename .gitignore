@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/app/Http/Controllers/BlogController.php
 /storage/*.key
 /vendor
 .env
