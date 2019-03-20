@@ -3,6 +3,7 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 type Query {
+    getTags: [Tags]! @all
     lastNews(id: [Int!]!): [News]!
     news: [News!]! @all
     newsById(id: Int! @eq): News @find
@@ -15,6 +16,7 @@ type Query {
 }
 
 type Mutation {
+    addTags(name: String @rules(apply: ["required"])): Tags @create
     latestNews(
         title: String @rules(apply: ["required"])
         alias: String @rules(apply: ["required"])
@@ -28,6 +30,7 @@ type Mutation {
         settings: String @rules(apply: ["required"])
         created_at: String
         updated_at: String
+        tags: [Int] @rules(apply: ["required"])
     ): String
     createNews(
         title: String @rules(apply: ["required"])
@@ -77,4 +80,10 @@ type News {
     settings: String!
     created_at: String!
     updated_at: String
+    tags: [Int]
+}
+
+type Tags {
+    id: ID
+    name: String!
 }

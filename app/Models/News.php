@@ -57,6 +57,9 @@ class News extends Model
         'status' => [
             'type' => 'boolean'
         ],
+        'tags' => [
+            'type' => 'keyword'
+          ],
         'settings' => [
             'type' => 'text'
         ],
@@ -118,4 +121,15 @@ class News extends Model
             ]
         ]
     ];
+
+    public function tags(){
+        return $this->hasManyThrough(
+            'App\Models\Tags',
+            'App\Models\NewsTags',
+            'news_id',
+            'id',
+            'id',
+            'tags_id'
+        );
+    }
 }

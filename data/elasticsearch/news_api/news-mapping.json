@@ -30,6 +30,9 @@
     "status":          {
       "type": "boolean"
     },
+    "tags":            {
+        "type": "keyword"
+    },
     "active_at":       {
       "type":   "date",
       "format": "yyyy-MM-dd"

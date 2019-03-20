@@ -22,16 +22,13 @@ class NewsFromElastic
     {
         return News::searchByQuery([
 
-                "bool" => [
-                    'must' => [
-                        'multi_match' => [
-                            'query' => "{$args['search']}",
-                        ],
+            "bool" => [
+                'must' => [
+                    'multi_match' => [
+                        'query' => "{$args['search']}",
                     ],
-
-                ]
-
-
+                ],
+            ]
         ], null, null, $args['limit'], $args['page']);
     }
 }
