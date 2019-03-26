@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "locale": {
+      "type": "keyword"
+    },
+    "name":   {
+      "type": "keyword"
+    }
+  }
+}
