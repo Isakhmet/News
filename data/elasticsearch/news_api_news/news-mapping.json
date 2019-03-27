@@ -27,6 +27,9 @@
       "search_analyzer":       "analyzer_for_full_text",
       "search_quote_analyzer": "analyzer_for_full_text"
     },
+    "locale": {
+      "type": "keyword"
+    },
     "status":          {
       "type": "boolean"
     },
