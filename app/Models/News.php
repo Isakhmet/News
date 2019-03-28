@@ -22,6 +22,7 @@ class News extends Model
         'active_at',
         'active_end',
         'settings',
+        'locale_id',
         'created_at',
         'updated_at'
     ];
@@ -60,6 +61,9 @@ class News extends Model
         'tags' => [
             'type' => 'keyword'
           ],
+        'locale' => [
+            'type' =>'keyword'
+        ],
         'settings' => [
             'type' => 'text'
         ],
@@ -131,5 +135,9 @@ class News extends Model
             'id',
             'tags_id'
         );
+    }
+
+    public function localeNews(){
+        return $this->belongsTo('App\Models\Locale', 'locale_id', 'id');
     }
 }

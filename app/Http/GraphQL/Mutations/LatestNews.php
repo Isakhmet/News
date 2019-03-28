@@ -2,6 +2,7 @@
 
 namespace App\Http\GraphQL\Mutations;
 
+use App\Models\Locale;
 use App\Models\News;
 use App\Models\NewsTags;
 use App\Models\Tags;
@@ -23,19 +24,29 @@ class LatestNews
      */
     public function resolve($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
-        $alias = '';
         $body = [];
 
         if (isset($args)){
 
             $tags_ids = $args['tags'];
+            $locale = $args['locale'];
             unset($args['tags']);
+            unset($args['locale']);
+
+            $locale_exist = Locale::where('locale', $locale)->get(['id'])->toArray();
+
+            if(!empty($locale_exist)){
+                $args['locale_id'] = $locale_exist[0]['id'];
+            }
 
             $tags_name = Tags::whereIn('id',$tags_ids)->get(['name'])->toArray();
 
-            $alias = $args['alias'];
             $news = News::create($args);
-            $news = $news->where('alias', $alias)->with('tags')->get()->toArray();
+            $news = $news->where('alias', $args['alias'])->with('localeNews')->get()->toArray();
+
+            $body['locale'] = $news[0]['locale_news']['locale'];
+            unset($news[0]['locale_news']);
+            unset($news[0]['locale_id']);
 
             $news_id = $news[0]['id'];
             foreach ($tags_ids as $id){
@@ -64,7 +75,6 @@ class LatestNews
             ];
 
             $es = ClientBuilder::create()->build();
-
             $client = $es->index($params);
 
             return isset($client['result']) ? $client['result'] : 'Something is wrong';
