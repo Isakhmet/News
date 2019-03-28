@@ -22,9 +22,10 @@ class CreateNewsTable extends Migration
             $table->string('image_copyright')->nullable();
             $table->longText('description');
             $table->boolean('status');
-            $table->date('active_at');
-            $table->date('active_end')->nullable();
+            $table->timestamp('active_at');
+            $table->timestamp('active_end')->nullable();
             $table->text('settings');
+            $table->integer('locale_id')->default(1);
             $table->timestamps();
         });
     }

@@ -2,11 +2,11 @@
 
 namespace App\Http\GraphQL\Queries;
 
-use App\Models\News;
+use App\Models\Locale;
 use GraphQL\Type\Definition\ResolveInfo;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class LastNews
+class GetLocale
 {
     /**
      * Return a value for the field.
@@ -20,11 +20,6 @@ class LastNews
      */
     public function resolve($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
-        $data = [];
-        foreach ($args as $arg){
-            $data[] = $arg;
-        }
-
-        return News::whereIn('id', $args['id'])->get();
+        return Locale::all();
     }
 }

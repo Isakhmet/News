@@ -6,7 +6,7 @@ use App\Models\News;
 use GraphQL\Type\Definition\ResolveInfo;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class LastNews
+class NewsFromElastic
 {
     /**
      * Return a value for the field.
@@ -20,11 +20,15 @@ class LastNews
      */
     public function resolve($rootValue, array $args, GraphQLContext $context = null, ResolveInfo $resolveInfo)
     {
-        $data = [];
-        foreach ($args as $arg){
-            $data[] = $arg;
-        }
+        return News::searchByQuery([
 
-        return News::whereIn('id', $args['id'])->get();
+            "bool" => [
+                'must' => [
+                    'multi_match' => [
+                        'query' => "{$args['search']}",
+                    ],
+                ],
+            ]
+        ], null, null, $args['limit'], $args['page']);
     }
 }

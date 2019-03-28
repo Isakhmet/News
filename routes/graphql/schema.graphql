@@ -3,13 +3,28 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 type Query {
+
+    getTags: [Tags]! @all
+
+    getLocale: [Locale]
+
     lastNews(id: [Int!]!): [News]!
-    news: [News!]! @all
-    newsById(id: Int! @eq): News @find
+
+    newsFromElastic(
+        search: String,
+        limit: Int,
+        page: Int,
+        tags: String
+    ): [News]
 }
 
 type Mutation {
-    createNews(
+    addTags(name: String @rules(apply: ["required"])): Tags @create
+    addLocale(
+        locale: String @rules(apply: ["required"])
+        name: String @rules(apply: ["required"])
+    ): Locale @create(model: "App\\Models\\Locale")
+    latestNews(
         title: String @rules(apply: ["required"])
         alias: String @rules(apply: ["required"])
         anons: String @rules(apply: ["required"])
@@ -20,27 +35,12 @@ type Mutation {
         active_at: String @rules(apply: ["required"])
         active_end:String
         settings: String @rules(apply: ["required"])
-        created_at: String @rules(apply: ["required"])
+        created_at: String
         updated_at: String
-    ): News @create(model: "App\\Models\\News")
-    updateNews(
-        id: ID @rules(apply: ["required"])
-        title: String @rules(apply: ["required"])
-        alias: String @rules(apply: ["required"])
-        anons: String @rules(apply: ["required"])
-        image: String
-        image_copyright: String
-        description: String @rules(apply: ["required"])
-        status: Boolean @rules(apply: ["required"])
-        active_at: String @rules(apply: ["required"])
-        active_end:String
-        settings: String @rules(apply: ["required"])
-        created_at: String @rules(apply: ["required"])
-        updated_at: String
-    ): News @update(model: "App\\Models\\News")
-    deleteNews(
-        id: ID!
-    ): News @delete(model: "App\\Models\\News")
+        tags: [Int] @rules(apply: ["required"])
+        locale: String
+    ): String
+
 }
 
 type News {
@@ -51,10 +51,25 @@ type News {
     image: String
     image_copyright: String
     description: String!
-    status: Boolean!
+    status: String!
     active_at: String!
     active_end:String
     settings: String!
     created_at: String!
     updated_at: String
+    tags: [Int]
+    locale: String
 }
+
+type Locale {
+    id: ID
+    locale: String
+    name: String
+}
+
+type Tags {
+    id: ID
+    name: String!
+}
+
+
